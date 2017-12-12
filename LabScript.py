@@ -34,23 +34,31 @@ def set_micros(food):
 
     #print(foods)
     #print(cholineVals)
+
+    lenFoods = len(foods)
         
-    for x in range(len(foods)):
+    for x in range(lenFoods):
         if(food == foods[x]):
             index = x
+            choline = float(cholineVals[index])
+            betaine = float(betaineVals[index])
+            folate = float(folateVals[index])
+            b12 = float(b12Vals[index])
 
-        else:
-            continue
+            #for testing purposes
+            print("this is the choline for ", food, ": ", choline)
+            print("this is the betaine for ", food, ": ", betaine)
+            print("this is the folate for ", food, ": ", folate)
+            print("this is the b12 for ", food, ": ", b12)
+            break
 
-    choline = float(cholineVals[index])
-    betaine = float(betaineVals[index])
-    folate = float(folateVals[index])
-    b12 = float(b12Vals[index])
+        elif((x == len(foods) -1) and (food != foods[x])):
+            print("ERROR NOT FOUND")
+            sys.exit()
 
-    print("this is the choline for ", food, ": ", choline)
-    print("this is the betaine for ", food, ": ", betaine)
-    print("this is the folate for ", food, ": ", folate)
-    print("this is the b12 for ", food, ": ", b12)
+            
+
+    
 
 
 def calculate(freq, amount):
@@ -66,8 +74,9 @@ def calculate(freq, amount):
     fin_folate = per100g * freq * folate
     fin_b12 = per100g * freq * b12
 
-    print("This is the micronutrient breakdown for ", food)
-    print("This is the choline content: ", fin_choline)
+    #for testing purposes
+    print("This is the micronutrient breakdown for ", food, ": ")
+    print("\nThis is the choline content: ", fin_choline)
     print("This is the betaine content: ", fin_betaine)
     print("This is the folate content: ", fin_folate)
     print("This is the B12 content: ", fin_b12)
@@ -88,19 +97,17 @@ def print_frequencies():
    
    
 def main():
-    
     global food
     
     food = input('Enter the food you are calculating the micronutrients for? (check data file to find specific name to type) ')
+    set_micros(food)
+    
     amount = float(input('\nHow often is the food consumed? (ex: if it\'s 40g, put 40, or 125mL, put 125) '))
+    
     print_frequencies()
     freq = float(input('\nHow often is the food item consumed? (input number corresponding to frequency) '))
-    print(type(freq))
     
-    set_micros(food)
-    print("Found micronutrient values for ", food, "...")
-    
-    print("Now calculating final micronutrient values... ")
+    print("\nNow calculating final micronutrient values... ")
     calculate(freq, amount)
 
 
