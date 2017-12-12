@@ -1,13 +1,56 @@
 import csv
     
 
-def micronutrients(food):
+def set_micros(food):
+    global foodName
     global choline
     global betaine
     global folate
     global b12
+    global index
+    
 
-    choline = 5
+    with open('data.csv') as csvfile:
+        readCSV = csv.reader(csvfile, delimiter=',')
+        foods = []
+        cholineVals = []
+        betaineVals = []
+        folateVals = []
+        b12Vals = []
+
+        for row in readCSV:
+            foodName = row[0]
+            choline = row[1]
+            betaine = row[2]
+            folate = row[3]
+            b12 = row[4]
+            
+            foods.append(foodName)
+            cholineVals.append(choline)
+            betaineVals.append(betaine)
+            folateVals.append(folate)
+            b12Vals.append(b12)
+
+    print(foods)
+    print(cholineVals)
+        
+    for x in range(len(foods)):
+        if(food == foods[x]):
+            index = x
+
+        else:
+            continue
+
+    choline = cholineVals[index]
+    betaine = betaineVals[index]
+    folate = folateVals[index]
+    b12 = b12Vals[index]
+
+    print("this is the choline for ", food, ": ", choline)
+    print("this is the betaine for ", food, ": ", betaine)
+    print("this is the folate for ", food, ": ", folate)
+    print("this is the b12 for ", food, ": ", b12)
+
 
 def calculate(freq, amount):
     global fin_choline
@@ -15,7 +58,7 @@ def calculate(freq, amount):
     global fin_folate
     global fin_b12
 
-    per100g = amount/100
+    amount = amount/100
     
     fin_choline = per100g * freq * choline
     fin_betaine = per100g * freq * betaine
@@ -30,32 +73,33 @@ def calculate(freq, amount):
 
 
 
-#def print_frequencies(tempFrequency):
-   #global freq
-
-#def set_frequencies(numFrequency):
-    
+def print_frequencies():
+    print("\nThese are the frequencies") 
+    print("0: never")
+    print("0.03: 1/month")
+    print("0.07: 2/month")
+    print("0.13: 1/week")
+    print("0.4: 3/week")
+    print("0.73: 5.5/week")
+    print("1: 1/day")
+    print("2.5: 2.5/day")
+    print("4.5: 4.5/day")
+   
+   
 def main():
-    with open("data.csv", "rt") as f:
-        reader = csv.reader(f, delimiter="\t")
-        for i, line in enumerate(reader):
-            print ('line[{}] = {}'.format(i, line))
     
     global food
     
-    food = input("Enter the food you are calculating the micronutrients for? (check data file to find specific name to type) ")
-    amount = input("How often is the food consumed? (ex: if it's 40g, dont put 0.4, put 40) ") 
-    freq = input("how often is it consumed? (input number corresponding to frequencies) ")
+    food = input('Enter the food you are calculating the micronutrients for? (check data file to find specific name to type) ')
+    amount = input('\nHow often is the food consumed? (ex: if it\'s 40g, put 40, or 125mL, put 125) ')
+    print_frequencies()
+    freq = input('\nHow often is the food item consumed? (input number corresponding to frequency) ')
     
-    micronutrients(food)
-    print("found micronutrient values for ", food, "...")
+    set_micros(food)
+    print("Found micronutrient values for ", food, "...")
     
     print("Now calculating final micronutrient values... ")
     calculate(freq, amount)
-
-    
-    #print(choline)
-    
 
 
 main()

@@ -1,4 +1,4 @@
-food,choline,betaine,folate,b12
+﻿food,choline,betaine,folate,b12
 coffee,2.6,0.1,2,0
 orange juice,6.6,0.2,19,0
 grapefruit juice,7.7,unknown,10,0
@@ -91,8 +91,3 @@ prunes,10.1,0.4,4,0
 cranberries (dry),4,0.1,0,0
 apricots/figs,14.85,0.5,9.5,0
 cookies,16.25,27.8,117,0.15
-,,,,
-,,,,
-,,,,
-,,,,
-,,,,
