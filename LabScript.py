@@ -1,4 +1,5 @@
 import csv
+import sys
     
 
 def set_micros(food):
@@ -31,8 +32,8 @@ def set_micros(food):
             folateVals.append(folate)
             b12Vals.append(b12)
 
-    print(foods)
-    print(cholineVals)
+    #print(foods)
+    #print(cholineVals)
         
     for x in range(len(foods)):
         if(food == foods[x]):
@@ -41,10 +42,10 @@ def set_micros(food):
         else:
             continue
 
-    choline = cholineVals[index]
-    betaine = betaineVals[index]
-    folate = folateVals[index]
-    b12 = b12Vals[index]
+    choline = float(cholineVals[index])
+    betaine = float(betaineVals[index])
+    folate = float(folateVals[index])
+    b12 = float(b12Vals[index])
 
     print("this is the choline for ", food, ": ", choline)
     print("this is the betaine for ", food, ": ", betaine)
@@ -58,7 +59,7 @@ def calculate(freq, amount):
     global fin_folate
     global fin_b12
 
-    amount = amount/100
+    per100g = amount/100
     
     fin_choline = per100g * freq * choline
     fin_betaine = per100g * freq * betaine
@@ -91,9 +92,10 @@ def main():
     global food
     
     food = input('Enter the food you are calculating the micronutrients for? (check data file to find specific name to type) ')
-    amount = input('\nHow often is the food consumed? (ex: if it\'s 40g, put 40, or 125mL, put 125) ')
+    amount = float(input('\nHow often is the food consumed? (ex: if it\'s 40g, put 40, or 125mL, put 125) '))
     print_frequencies()
-    freq = input('\nHow often is the food item consumed? (input number corresponding to frequency) ')
+    freq = float(input('\nHow often is the food item consumed? (input number corresponding to frequency) '))
+    print(type(freq))
     
     set_micros(food)
     print("Found micronutrient values for ", food, "...")
