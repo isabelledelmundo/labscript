@@ -1,6 +1,5 @@
 import csv
 import sys
-    
 
 def set_micros(food):
     global foodName
@@ -13,6 +12,7 @@ def set_micros(food):
 
     with open('data.csv') as csvfile:
         readCSV = csv.reader(csvfile, delimiter=',')
+        rows = []
         foods = []
         cholineVals = []
         betaineVals = []
@@ -55,11 +55,6 @@ def set_micros(food):
         elif((x == len(foods) -1) and (food != foods[x])):
             print("ERROR NOT FOUND")
             sys.exit()
-
-            
-
-    
-
 
 def calculate(freq, amount):
     global fin_choline
